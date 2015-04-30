@@ -1,6 +1,7 @@
 import java.io.File;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -14,7 +15,6 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 
 public class Interface {
-	///CLASS VARIABLES///
 	private static String[] stateNames = {"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia",
 			"Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan",
 			"Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York",
@@ -25,7 +25,6 @@ public class Interface {
 			"UT", "VT", "VA", "WA", "WV", "WI", "WY"};
 	private static HashMap<String, String> states = new HashMap<String, String>();
 	
-	///==================METHODS==================///
 	public static void main(String[] args) throws Exception {
 		//Assign variables
 		for (int i = 0; i < stateNames.length; i++)
@@ -52,10 +51,12 @@ public class Interface {
 			else
 				continue;
 			
+			//Cities loop
 			while (true) {
 				System.out.print("\nEnter city:  ");
-				String city = kin.nextLine();
-				System.out.println(st8.getCityByName(city));
+				String city = kin.nextLine().trim();
+				ArrayList<City> cities = st8.getCityByName(city);
+				System.out.println("There are "+cities.size()+" cities by that name in "+st8+".");
 				System.out.print("New city? (y/n):  ");
 				if (!kin.nextLine().equals("y"))
 					break;
