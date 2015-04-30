@@ -10,16 +10,18 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 public class State {
+	private String name;
 	private ArrayList<City> cities = new ArrayList<City>();
 	private File xFile;
 
+	///INSTANTIATE///
 	State(String state) {
+		name = state.toUpperCase();
 		try {
-			xFile = new File("states/"+state + ".xml");
+			xFile = new File("states/"+name + ".xml");
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(xFile);
-			
 			doc.getDocumentElement().normalize();
 			NodeList nList = doc.getElementsByTagName("site");
 
@@ -44,11 +46,19 @@ public class State {
 		}
 	}
 	
+	///GET METHODS///
 	public ArrayList<City> getCityByName(String name) {
 		ArrayList<City> city = new ArrayList<City>();
 		for (City c : cities)
 			if (c.getName().equals(name))
 				city.add(c);
 		return city;
+	}
+	public String getName() {
+		return name;
+	}
+	
+	public String toString() {
+		return name;
 	}
 }
